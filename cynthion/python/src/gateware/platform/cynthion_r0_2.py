@@ -111,25 +111,25 @@ class CynthionPlatformRev0D2(LUNAApolloPlatform, LatticeECP5Platform):
         ULPIResource("control_phy", 0,
             data="R2 R1 P2 P1 N1 M2 M1 L2", clk="R4", clk_dir='o',
             dir="T3", nxt="T2", stp="T4", rst="R3", rst_invert=True,
-            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
         ULPIResource("aux_phy", 0,
             data="G2 G1 F2 F1 E1 D1 C1 B1", clk="K2", clk_dir='o',
             dir="J1", nxt="H2", stp="J2", rst="K1", rst_invert=True,
-            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
         ULPIResource("target_phy", 0,
             data="D16 E15 E16 F15 F16 G15 J16 K16", clk="B15", clk_dir='o',
             dir="C15", nxt="C16", stp="B16", rst="G16", rst_invert=True,
-            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
 
         # legacy USB port names
         ULPIResource("sideband_phy", 0,
             data="R2 R1 P2 P1 N1 M2 M1 L2", clk="R4", clk_dir='o',
             dir="T3", nxt="T2", stp="T4", rst="R3", rst_invert=True,
-            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
         ULPIResource("host_phy", 0,
             data="G2 G1 F2 F1 E1 D1 C1 B1", clk="K2", clk_dir='o',
             dir="J1", nxt="H2", stp="J2", rst="K1", rst_invert=True,
-            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
 
         # Target port power switching.
         Resource("power_a_port",       0, Pins("C14", dir="o"), Attrs(IO_TYPE="LVCMOS33")),
@@ -146,14 +146,14 @@ class CynthionPlatformRev0D2(LUNAApolloPlatform, LatticeECP5Platform):
             Subsignal("rwds",  Pins( "A13", dir="io")),
             Subsignal("cs",    PinsN("A14", dir="o")),
             Subsignal("reset", PinsN("B13", dir="o")),
-            Attrs(IO_TYPE="LVCMOS18", SLEWRATE="FAST")
+            Attrs(IO_TYPE="LVCMOS18", SLEWRATE="SLOW", DRIVE=4)
         ),
 
         # User I/O connections.
-        Resource("user_io", 0, Pins("A5", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
-        Resource("user_io", 1, Pins("A4", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
-        Resource("user_io", 2, Pins("A3", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
-        Resource("user_io", 3, Pins("A2", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+        Resource("user_io", 0, Pins("A5", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
+        Resource("user_io", 1, Pins("A4", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
+        Resource("user_io", 2, Pins("A3", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
+        Resource("user_io", 3, Pins("A2", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
     ]
 
     connectors = [

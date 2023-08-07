@@ -121,15 +121,15 @@ class CynthionPlatformRev1D2(LUNAApolloPlatform, LatticeECP5Platform):
         ULPIResource("control_phy", 0,
             data="N16 N14 P16 P15 R16 R15 T15 P14", clk="L14", clk_dir='o',
             dir="M16", nxt="M15", stp="L15", rst="L16", rst_invert=True,
-            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
         ULPIResource("aux_phy", 0,
             data="F16 G15 G16 H15 J15 J16 K15 K16", clk="D16", clk_dir='o',
             dir="E16", nxt="F15", stp="E15", rst="J13", rst_invert=True,
-            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
         ULPIResource("target_phy", 0,
             data="R2 R1 P2 P1 N3 N1 M2 M1", clk="T4", clk_dir='o',
             dir="R3", nxt="T2", stp="T3", rst="R4", rst_invert=True,
-            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
 
         # direct connection to TARGET USB D+/D-
         Resource("target_usb_diff", 0, DiffPairs("N4", "P3", dir="i"), Attrs(IO_TYPE="LVDS", PULLMODE="NONE")),
@@ -190,7 +190,7 @@ class CynthionPlatformRev1D2(LUNAApolloPlatform, LatticeECP5Platform):
             Subsignal("rwds",  Pins( "D1", dir="io")),
             Subsignal("cs",    PinsN("B2", dir="o")),
             Subsignal("reset", PinsN("C1", dir="o")),
-            Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")
+            Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)
         ),
 
         # User I/O connections.
@@ -198,7 +198,7 @@ class CynthionPlatformRev1D2(LUNAApolloPlatform, LatticeECP5Platform):
         Resource("user_pmod", 1, Pins("B4 B5 B6 B7 C5 A5 A6 A7", dir="io"), Attrs(IO_TYPE="LVCMOS33")),
         Resource("user_mezzanine", 0,
                 Pins("B8 A9 B10 A10 B11 D14 C14 F14 E14 G13 G12 C16 C15 B16 B15 A14 B13 A13 D13 A12 B12 A11", dir="io"),
-                Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+                Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
     ]
 
     connectors = [
