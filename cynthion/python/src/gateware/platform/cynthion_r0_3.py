@@ -115,25 +115,25 @@ class CynthionPlatformRev0D3(LUNAApolloPlatform, LatticeECP5Platform):
         ULPIResource("control_phy", 0,
             data="R1 P3 P1 P2 N1 M2 M1 L2", clk="P4", clk_dir='o',
             dir="T2", nxt="R2", stp="R3", rst="T3", rst_invert=True,
-            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
         ULPIResource("aux_phy", 0,
             data="F1 F2 E1 E2 D1 E3 C1 C2", clk="J1", clk_dir='o',
             dir="G1", nxt="G2", stp="H2", rst="J2", rst_invert=True,
-            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
         ULPIResource("target_phy", 0,
             data="E16 F14 F16 F15 G16 G15 H15 J16", clk="C15", clk_dir='o',
             dir="D16", nxt="E15", stp="D14", rst="C16", rst_invert=True,
-            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
 
         # legacy USB port names
         ULPIResource("sideband_phy", 0,
             data="R1 P3 P1 P2 N1 M2 M1 L2", clk="P4", clk_dir='o',
             dir="T2", nxt="R2", stp="R3", rst="T3", rst_invert=True,
-            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
         ULPIResource("host_phy", 0,
             data="F1 F2 E1 E2 D1 E3 C1 C2", clk="J1", clk_dir='o',
             dir="G1", nxt="G2", stp="H2", rst="J2", rst_invert=True,
-            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+            attrs=Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
 
         # Target port power switching.
         #
@@ -158,12 +158,12 @@ class CynthionPlatformRev0D3(LUNAApolloPlatform, LatticeECP5Platform):
             Subsignal("rwds",  Pins( "A13", dir="io")),
             Subsignal("cs",    PinsN("A14", dir="o")),
             Subsignal("reset", PinsN("B13", dir="o")),
-            Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")
+            Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)
         ),
 
         # User I/O connections (SMA connectors).
-        Resource("user_io", 0, Pins("C3", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
-        Resource("user_io", 1, Pins("D3", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+        Resource("user_io", 0, Pins("C3", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
+        Resource("user_io", 1, Pins("D3", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
 
         # Convenience references.
         Resource("user_pmod", 0, Pins("A3 A4 A5 A6 C6 B6 C7 B7", dir="io"), Attrs(IO_TYPE="LVCMOS33")),

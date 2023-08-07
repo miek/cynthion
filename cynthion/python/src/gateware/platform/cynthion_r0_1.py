@@ -31,7 +31,7 @@ def ULPIResource(name, data_sites, clk_site, dir_site, nxt_site, stp_site, reset
         Subsignal("nxt",   Pins(nxt_site,    dir="i" )),
         Subsignal("stp",   Pins(stp_site,    dir="o" )),
         Subsignal("rst",   PinsN(reset_site, dir="o" )),
-        Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")
+        Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)
     )
 
 
@@ -184,14 +184,14 @@ class CynthionPlatformRev0D1(LUNAApolloPlatform, LatticeECP5Platform):
             Subsignal("rwds",  Pins( "A13", dir="io")),
             Subsignal("cs",    PinsN("A14", dir="o")),
             Subsignal("reset", PinsN("B13", dir="o")),
-            Attrs(IO_TYPE="LVCMOS18", SLEWRATE="FAST")
+            Attrs(IO_TYPE="LVCMOS18", SLEWRATE="SLOW", DRIVE=4)
         ),
 
         # User I/O connections.
-        Resource("user_io", 0, Pins("A5", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
-        Resource("user_io", 1, Pins("A4", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
-        Resource("user_io", 2, Pins("A3", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
-        Resource("user_io", 3, Pins("A2", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="FAST")),
+        Resource("user_io", 0, Pins("A5", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
+        Resource("user_io", 1, Pins("A4", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
+        Resource("user_io", 2, Pins("A3", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
+        Resource("user_io", 3, Pins("A2", dir="io"), Attrs(IO_TYPE="LVCMOS33", SLEWRATE="SLOW", DRIVE=4)),
     ]
 
     connectors = [
