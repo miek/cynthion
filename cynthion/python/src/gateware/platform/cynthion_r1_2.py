@@ -12,8 +12,22 @@ from amaranth_boards.resources import *
 
 from luna.gateware.platform.core import LUNAApolloPlatform
 from luna.gateware.architecture.car import LunaECP5DomainGenerator
+from luna.gateware.architecture.adv import ApolloAdvertiser
+from luna.gateware.usb.usb2.control import USBControlEndpoint
 
 __all__ = ["CynthionPlatformRev1D2"]
+
+def control_phy_hook(usb_device, m):
+    # Add Apollo advertisement submodule and its request handler
+    m.submodules.apollo_adv = adv = ApolloAdvertiser()
+    control_ep = None
+    for endpoint in usb_device._endpoints:
+        if isinstance(endpoint, USBControlEndpoint):
+            control_ep = endpoint
+            break
+    if control_ep is None:
+        control_ep = usb_device.add_control_endpoint()
+    control_ep.add_request_handler(adv.default_request_handler())
 
 class CynthionPlatformRev1D2(LUNAApolloPlatform, LatticeECP5Platform):
     """ Board description for Cynthion r1.2 """
@@ -29,8 +43,8 @@ class CynthionPlatformRev1D2(LUNAApolloPlatform, LatticeECP5Platform):
     # Provide the type that'll be used to create our clock domains.
     clock_domain_generator = LunaECP5DomainGenerator
 
-    # By default, assume we'll be connecting via our target PHY.
-    default_usb_connection = "target_phy"
+    # By default, assume we'll be connecting via the control PHY.
+    default_usb_connection = "control_phy"
 
     #
     # Default clock frequencies for each of our clock domains.
@@ -207,6 +221,11 @@ class CynthionPlatformRev1D2(LUNAApolloPlatform, LatticeECP5Platform):
         Connector("mezzanine", 0,
             "- - B8 A9 B10 A10 B11 D14 C14 F14 E14 G13 G12 - - - - C16 C15 B16 B15 A14 B13 A13 D13 A12 B12 A11 - -"),
     ]
+
+    # Provides platform-specific hooks that will be called during USBDevice elaboration
+    usb_device_hooks = {
+        "control_phy_0": control_phy_hook
+    }
 
     def toolchain_prepare(self, fragment, name, **kwargs):
         overrides = {
