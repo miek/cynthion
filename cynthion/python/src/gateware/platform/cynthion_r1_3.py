@@ -18,16 +18,8 @@ from luna.gateware.usb.usb2.control import USBControlEndpoint
 __all__ = ["CynthionPlatformRev1D3"]
 
 def control_phy_hook(usb_device, m):
-    # Add Apollo advertisement submodule and its request handler
+    # Add Apollo advertisement submodule
     m.submodules.apollo_adv = adv = ApolloAdvertiser()
-    control_ep = None
-    for endpoint in usb_device._endpoints:
-        if isinstance(endpoint, USBControlEndpoint):
-            control_ep = endpoint
-            break
-    if control_ep is None:
-        control_ep = usb_device.add_control_endpoint()
-    control_ep.add_request_handler(adv.default_request_handler())
 
 class CynthionPlatformRev1D3(LUNAApolloPlatform, LatticeECP5Platform):
     """ Board description for Cynthion r1.3 """
